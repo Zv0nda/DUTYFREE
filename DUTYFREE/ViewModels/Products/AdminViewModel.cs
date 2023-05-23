@@ -1,8 +1,9 @@
 ﻿using DUTYFREE.Models.Products;
 
-namespace DUTYFREE.ViewModels
+namespace DUTYFREE.ViewModels.Products
 {
-    public class AdministrationViewModel
+
+    public class AdminViewModel
     {
         public IList<Product> Products { get; set; }
     }
