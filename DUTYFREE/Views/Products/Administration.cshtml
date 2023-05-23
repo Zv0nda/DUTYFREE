@@ -2,4 +2,38 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Tabulka Produktů";
 }
+
+<table>
+    <thead>
+        <tr>
+            <th align="center">Produkt</th>
+            <th ></th>
+            <th>Cena za ks</th>
+            <th>Aktuální množství</th>
+            <th>Akce</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td><img src="@Url.Action()" alt="Product Image" /></td>
+                <td>@product.Price</td>
+                <td>@product.Quantity</td>
+                <td>
+
+                    <button type="button" class="btn">
+                        <img src="cesta_k_obrazku" alt="Edit">
+                    </button>
+                    <button type="button" class="btn">
+                        <img src="cesta_k_obrazku" alt="Delete">
+                    </button>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
