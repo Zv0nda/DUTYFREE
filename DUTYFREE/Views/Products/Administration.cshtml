@@ -26,7 +26,10 @@
         {
             <tr>
                 <td>@product.Name</td>
-                    <td><img class="pictureproduct" src="https://http.cat/404.jpg" alt="Product Image" /></td>
+                <div>
+                <td><img class="pictureproduct" src=@product.ImageUrl alt="Product Image" /></td>
+                </div>
+                
                 <td>@product.Price</td>
                 <td>@product.Quantity</td>
                 <td>

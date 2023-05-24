@@ -13,6 +13,7 @@
         public int Quantity { get; set; }
         public string ImageUrl { get; set; }
         public IFormFile Image { get; set; }
+        public string Format { get; set; }
 
 
     }
