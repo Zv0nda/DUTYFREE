@@ -27,9 +27,11 @@ body {
 }
 
 .pictureproduct{
-    height:140px;
-    width:140px;
+    height:30px;
+    width:auto;
+    
 }
+
 
 .add-button-container {
     text-align: right;

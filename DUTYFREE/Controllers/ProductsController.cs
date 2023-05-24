@@ -6,10 +6,10 @@ namespace DUTYFREE.Controllers
 {
     public class ProductsController : Controller
     {
-        public static List<Product> _products = new List<Product> { new Product { Name = "Pepsi", Price = 30 , ProductID = 0, Quantity = 6 },
-                                                                     new Product { Name = "Cola", Price = 36, ProductID = 1 },
-                                                                     new Product { Name = "Tatranka", Price = 10, ProductID = 2},
-                                                                     new Product { Name = "Corny", Price = 12, ProductID = 3 }};
+        public static List<Product> _products = new List<Product> { new Product { Name = "Pepsi", Price = 30 , ProductID = 0, Quantity = 6, ImageUrl = "https://www.officeo.cz/galerie/1_242844/pepsi-plech-24x-0-33-l-default.jpg", Format = "pepsi-image"},
+                                                                     new Product { Name = "Cola", Price = 36, ProductID = 1, ImageUrl ="https://www.officeo.cz/galerie/1_182632/coca-cola-6x-1-5-l-default.jpg", Format = "cola-image" },
+                                                                     new Product { Name = "Tatranka", Price = 10, ProductID = 2, ImageUrl="https://www.officeo.cz/galerie/1_28264/horalky-sedita-arasidove-50-g-default.jpg", Format = "tatranka-image"},
+                                                                     new Product { Name = "Corny", Price = 12, ProductID = 3, ImageUrl = "https://secure.ce-tescoassets.com/assets/CZ/519/4011800546519/ShotType1_540x540.jpg", Format = "corny-image" }};
 
 
         public IActionResult Administration()
