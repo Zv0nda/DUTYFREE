@@ -33,9 +33,13 @@
                 + '</tr>'
             );
         }
+         function removeRow(button) {
+      var row = button.parentNode.parentNode;
+      row.parentNode.removeChild(row);
+    }
     </script>
 </head>
-
+    
 
 <body>
     <div class="Tlacitko">
@@ -66,13 +70,13 @@
 
                         <button type="button" class="btn">
 
-                            <img src="https://o.remove.bg/downloads/a8bfe5ba-7b5c-4820-b433-6f9078232264/217-2173246_spanner-icon-spanner-icon-orange-png-transparent-png-removebg-preview.png" border="0" width="30" height="30" alt="Edit" />
+                            <img src="https://o.remove.bg/downloads/a8bfe5ba-7b5c-4820-b433-6f9078232264/217-2173246_spanner-icon-spanner-icon-orange-png-transparent-png-removebg-preview.png" border="0" width="30" height="32" alt="Edit" />
 
                         </button>
 
-                        <button type="button" class="btn">
-
+                        <button type="button" class="btn" class="remove-button" onclick="removeRow(this)">
                             <img src="http://www.clker.com/cliparts/b/a/L/8/a/Z/orange-cross-md.png" border="0" width="20" height="20" alt="Delete" />
+                            
                         </button>
 
                     </td>
