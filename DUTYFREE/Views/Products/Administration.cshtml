@@ -17,8 +17,9 @@
                 + '<td class="name">'
                 + '<input type="text" class="form-control" name="Name" required />'
                 + '</td>'
-                + '<td class="image">'
-                + '<input type="file" class="form-control" name="Image" accept="image/jpeg,image/png" required />'
+                + '<td id="centerColumn" class="image">'
+                + '<input type="file" id="upload" class="file-input" style="display:none" required/>'
+                + '<label class="LabelUpload" for="upload">Zvolit soubor</label>'
                 + '</td>'
                 + '<td class="price">'
                 + '<input value="0" type="number" class="form-control" name="Price" required />'
@@ -68,11 +69,11 @@
                     <td id="centerColumn" width="150">@product.Quantity Ks</td>
                     <td id="centerColumn">
 
-                        <button type="button" class="btn">
-                            <img src="https://o.remove.bg/downloads/a8bfe5ba-7b5c-4820-b433-6f9078232264/217-2173246_spanner-icon-spanner-icon-orange-png-transparent-png-removebg-preview.png" border="0" width="30" height="32" alt="Edit" />
+                        <button type="button" class="btn edit-button">
+                            <img id="editimage" src="https://o.remove.bg/downloads/d8c766c4-9a32-4906-ae36-f83b932c69f9/image-removebg-preview.png" border="0" width="22" height="22" alt="Edit" />
                         </button>
 
-                        <button type="button" class="btn" class="remove-button" onclick="removeRow(this)">
+                        <button type="button" class="btn remove-button" onclick="removeRow(this)">
                             <img src="http://www.clker.com/cliparts/b/a/L/8/a/Z/orange-cross-md.png" border="0" width="20" height="20" alt="Delete" />
                             
                         </button>

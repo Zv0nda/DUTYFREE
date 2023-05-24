@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="NováSložka\" />
+    <Compile Remove="NováSložka1\**" />
+    <Compile Remove="NováSložka\**" />
+    <Content Remove="NováSložka1\**" />
+    <Content Remove="NováSložka\**" />
+    <EmbeddedResource Remove="NováSložka1\**" />
+    <EmbeddedResource Remove="NováSložka\**" />
+    <None Remove="NováSložka1\**" />
+    <None Remove="NováSložka\**" />
   </ItemGroup>
 
 </Project>
