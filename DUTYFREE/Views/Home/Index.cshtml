@@ -1,8 +1,93 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Přehled produktů</title>
+    <style>
+        .product-card {
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+            .product-card img {
+                width: 100%;
+                height: auto;
+                margin-bottom: 10px;
+            }
+
+            .product-card h4 {
+                margin: 0;
+            }
+
+            .product-card .stock {
+                margin-bottom: 10px;
+            }
+
+            .product-card .price {
+                font-weight: bold;
+            }
+
+        .search-bar {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Zadejte název produktu" />
+        <button type="button" id="search-button">Vyhledat</button>
+    </div>
+
+    <div id="product-list">
+        <div class="product-card">
+            <img src="obrazek1.jpg" alt="Produkt 1" />
+            <h4>Produkt 1</h4>
+            <div class="stock">Skladem: </div>
+            <div class="price">Cena: </div>
+            <button type="button" class="buy-button">Koupit</button>
+        </div>
+
+        <div class="product-card">
+            <img src="obrazek2.jpg" alt="Produkt 2" />
+            <h4>Produkt 2</h4>
+            <div class="stock">Skladem: 5 kusů</div>
+            <div class="price">Cena: 150 Kč</div>
+            <button type="button" class="buy-button">Koupit</button>
+        </div>
+
+        <!-- Další produkty -->
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#search-button').click(function () {
+                searchProducts();
+            });
+
+            $('#search-input').keypress(function (e) {
+                if (e.which === 13) {
+                    searchProducts();
+                }
+            });
+
+            function searchProducts() {
+                var searchTerm = $('#search-input').val().toLowerCase();
+                $('.product-card').each(function () {
+                    var productName = $(this).find('h4').text().toLowerCase();
+                    if (productName.includes(searchTerm)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

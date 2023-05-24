@@ -21,12 +21,12 @@
                 + '<input type="file" class="form-control" name="Image" accept="image/jpeg,image/png" required />'
                 + '</td>'
                 + '<td class="price">'
-                + '<input type="number" class="form-control" name="Price" required />'
+                + '<input value="0" type="number" class="form-control" name="Price" required />'
                 + '</td>'
                 + '<td class="quantity">'
-                + '<input type="number" class="form-control" name="Quantity" required />'
+                + '<input  value="0" placeholder="Kč" type="number" class="form-control" name="Quantity" required />'
                 + '</td>'
-                + '<td class="buttons">'
+                + '<td class="buttons" id="centerColumn">'
                 + '<button type="button" class="btn btn-success btn-save">Uložit</button>'
                 + '<button type="button" class="btn btn-success btn-discard">Zahodit</button>'
                 + '</td>'
@@ -50,28 +50,26 @@
     <table>
         <thead>
             <tr>
-                <th align="center">Produkt</th>
+                <th>Produkt</th>
                 <th></th>
-                <th>Cena za ks</th>
-                <th>Aktuální množství</th>
-                <th>Akce</th>
+                <th id="centerColumn" >Cena za ks</th>
+                <th id="centerColumn" width="200">Aktuální množství</th>
+                <th id="centerColumn" width="200">Akce</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var product in Model.Products)
             {
                 <tr>
-                    <td>@product.Name</td>
-                    <td><img class="pictureproduct" src=@product.ImageUrl alt="Product Image" /></td>
+                    <td width="250">@product.Name</td>
+                    <td width="320" id="ProductColumn"><img class="pictureproduct" src=@product.ImageUrl alt="Product Image"/></td>
 
-                    <td>@product.Price</td>
-                    <td>@product.Quantity</td>
-                    <td>
+                    <td id="centerColumn" width="150">@product.Price Kč</td>
+                    <td id="centerColumn" width="150">@product.Quantity Ks</td>
+                    <td id="centerColumn">
 
                         <button type="button" class="btn">
-
                             <img src="https://o.remove.bg/downloads/a8bfe5ba-7b5c-4820-b433-6f9078232264/217-2173246_spanner-icon-spanner-icon-orange-png-transparent-png-removebg-preview.png" border="0" width="30" height="32" alt="Edit" />
-
                         </button>
 
                         <button type="button" class="btn" class="remove-button" onclick="removeRow(this)">
