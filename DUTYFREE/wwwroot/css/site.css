@@ -32,22 +32,48 @@ body {
     
 }
 
-
-.add-button-container {
-    text-align: right;
-    margin-bottom: 10px;
+.Tlacitko{
+    text-align:right
 }
 
-.plusbutton {
-    height:32px;
-    width:32px;
-    background-color: orange;
-    border-radius:8px;
-    border:none;
-    align-content:center;
+.circle-button {
+    text-align:right;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: darkorange;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
 }
 
-.textPlusButton{
+    .circle-button .plus {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 15px;
+        height: 2px;
+        background-color: white;
+        transform: translate(-50%, -50%);
+    }
 
-    font-family:awesome;
-}
+        .circle-button .plus::before,
+        .circle-button .plus::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 15px;
+            height: 2px;
+            background-color: white;
+            transform: translate(-50%, -50%);
+        }
+
+        .circle-button .plus::before {
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
+
+        .circle-button .plus::after {
+            transform: translate(-50%, -50%) rotate(180deg);
+        }
