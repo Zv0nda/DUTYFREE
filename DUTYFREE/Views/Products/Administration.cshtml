@@ -5,50 +5,91 @@
     ViewData["Title"] = "Tabulka Produktů";
 }
 
-<div class="Tlacitko">
-    <button type="button" class="circle-button">
-        <span class="plus"></span>
-    </button>
-</div>
-
-
-
-<table>
-    <thead>
-        <tr>
-            <th align="center">Produkt</th>
-            <th ></th>
-            <th>Cena za ks</th>
-            <th>Aktuální množství</th>
-            <th>Akce</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var product in Model.Products)
-        {
-            <tr>
-                <td>@product.Name</td>
-                <div>
-                <td><img class="pictureproduct" src=@product.ImageUrl alt="Product Image" /></td>
-                </div>
-                
-                <td>@product.Price</td>
-                <td>@product.Quantity</td>
-                <td>
-
-                    <button type="button" class="btn">
-
-                        <img src="https://o.remove.bg/downloads/a8bfe5ba-7b5c-4820-b433-6f9078232264/217-2173246_spanner-icon-spanner-icon-orange-png-transparent-png-removebg-preview.png" border="0" width="30" height="30" alt="Edit" />
-
-                    </button>
-
-                    <button type="button" class="btn">
-
-                        <img src="http://www.clker.com/cliparts/b/a/L/8/a/Z/orange-cross-md.png" border="0" width="20" height="20" alt="Delete"/>
-                    </button>
-
-                </td>
-            </tr>
+<html>
+<head>
+    <title>Přidání produktu</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function createRow() {
+            const table = $('table tbody');
+            table.append(
+                '<tr>'
+                + '<td class="name">'
+                + '<input type="text" class="form-control" name="Name" required />'
+                + '</td>'
+                + '<td class="image">'
+                + '<input type="file" class="form-control" name="Image" accept="image/jpeg,image/png" required />'
+                + '</td>'
+                + '<td class="price">'
+                + '<input type="number" class="form-control" name="Price" required />'
+                + '</td>'
+                + '<td class="quantity">'
+                + '<input type="number" class="form-control" name="Quantity" required />'
+                + '</td>'
+                + '<td class="buttons">'
+                + '<button type="button" class="btn btn-success btn-save">Uložit</button>'
+                + '<button type="button" class="btn btn-success btn-discard">Zahodit</button>'
+                + '</td>'
+                + '</tr>'
+            );
         }
-    </tbody>
-</table>
+    </script>
+</head>
+
+
+<body>
+    <div class="Tlacitko">
+        <button onclick="createRow()" type="button" class="circle-button">
+            <span class="plus"></span>
+        </button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th align="center">Produkt</th>
+                <th></th>
+                <th>Cena za ks</th>
+                <th>Aktuální množství</th>
+                <th>Akce</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <div>
+                    <td><img class="pictureproduct" src=@product.ImageUrl alt="Product Image" /></td>
+                    </div>
+
+                    <td>@product.Price</td>
+                    <td>@product.Quantity</td>
+                    <td>
+
+                        <button type="button" class="btn">
+
+                            <img src="https://o.remove.bg/downloads/a8bfe5ba-7b5c-4820-b433-6f9078232264/217-2173246_spanner-icon-spanner-icon-orange-png-transparent-png-removebg-preview.png" border="0" width="30" height="30" alt="Edit" />
+
+                        </button>
+
+                        <button type="button" class="btn">
+
+                            <img src="http://www.clker.com/cliparts/b/a/L/8/a/Z/orange-cross-md.png" border="0" width="20" height="20" alt="Delete" />
+                        </button>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    
+</body>
+
+</html>
+
+
+
+
+
+
