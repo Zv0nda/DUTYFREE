@@ -6,7 +6,7 @@ namespace DUTYFREE.Controllers
 {
     public class ProductsController : Controller
     {
-        public static List<Product> _products = new List<Product> { new Product { Name = "Pepsi", Price = 42, ProductID = 0 },
+        public static List<Product> _products = new List<Product> { new Product { Name = "Pepsi", Price = 30 , ProductID = 0, Quantity = 6 },
                                                                      new Product { Name = "Cola", Price = 36, ProductID = 1 },
                                                                      new Product { Name = "Tatranka", Price = 10, ProductID = 2},
                                                                      new Product { Name = "Corny", Price = 12, ProductID = 3 }};

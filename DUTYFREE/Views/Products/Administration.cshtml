@@ -5,6 +5,12 @@
     ViewData["Title"] = "Tabulka Produktů";
 }
 
+<div class="add-button-container">
+  <button type="button" class="plusbutton">
+        <p class="textPlusButton">+</p>
+  </button>
+</div>
+
 <table>
     <thead>
         <tr>
@@ -20,15 +26,19 @@
         {
             <tr>
                 <td>@product.Name</td>
-                <td><img src="@Url.Action()" alt="Product Image" /></td>
+                    <td><img class="pictureproduct" src="https://http.cat/404.jpg" alt="Product Image" /></td>
                 <td>@product.Price</td>
                 <td>@product.Quantity</td>
                 <td>
 
                     <button type="button" class="btn">
+
                         <img src="https://o.remove.bg/downloads/d837c6f0-2a13-4ffa-8952-c7722077afc6/image-removebg-preview.png" border="0" width="20" height="20" alt="Edit" />
+
                     </button>
+
                     <button type="button" class="btn">
+
                         <img src="http://www.clker.com/cliparts/b/a/L/8/a/Z/orange-cross-md.png" border="0" width="20" height="20" alt="Delete"/>
                     </button>
 
