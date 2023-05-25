@@ -7,7 +7,32 @@
     <title>Přidání produktu</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        function editRow(button) {
+        function createRow() {
+            const table = $('table tbody');
+            table.append(
+                '<tr>'
+                + '<td class="name">'
+                + '<input type="text" class="form-control" name="Name" required />'
+                + '</td>'
+                + '<td id="centerColumn" class="image">'
+                + '<input type="file" id="upload" class="file-input" style="display:none" required/>'
+                + '<label class="LabelUpload" for="upload">Zvolit soubor</label>'
+                + '</td>'
+                + '<td class="price">'
+                + '<input value="0" type="number" class="form-control" name="Price" required />'
+                + '</td>'
+                + '<td class="quantity">'
+                + '<input  value="0" placeholder="Kč" type="number" class="form-control" name="Quantity" required />'
+                + '</td>'
+                + '<td class="buttons" id="centerColumn">'
+                + '<button type="button" class="btn btn-success btn-save">Uložit</button>'
+                + '<button type="button" class="btn btn-success btn-discard">Zahodit</button>'
+                + '</td>'
+                + '</tr>'
+            );
+        }
+
+            function editRow(button) {
             var row = button.parentNode.parentNode;
             var nameCell = row.querySelector('.name');
             var priceCell = row.querySelector('.price');
