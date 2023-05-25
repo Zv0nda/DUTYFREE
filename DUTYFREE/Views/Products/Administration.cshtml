@@ -1,7 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
     ViewData["Title"] = "Tabulka Produktů";
 }
 
@@ -10,37 +7,74 @@
     <title>Přidání produktu</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        function createRow() {
-            const table = $('table tbody');
-            table.append(
-                '<tr>'
-                + '<td class="name">'
-                + '<input type="text" class="form-control" name="Name" required />'
-                + '</td>'
-                + '<td id="centerColumn" class="image">'
-                + '<input type="file" id="upload" class="file-input" style="display:none" required/>'
-                + '<label class="LabelUpload" for="upload">Zvolit soubor</label>'
-                + '</td>'
-                + '<td class="price">'
-                + '<input value="0" type="number" class="form-control" name="Price" required />'
-                + '</td>'
-                + '<td class="quantity">'
-                + '<input  value="0" placeholder="Kč" type="number" class="form-control" name="Quantity" required />'
-                + '</td>'
-                + '<td class="buttons" id="centerColumn">'
-                + '<button type="button" class="btn btn-success btn-save">Uložit</button>'
-                + '<button type="button" class="btn btn-success btn-discard">Zahodit</button>'
-                + '</td>'
-                + '</tr>'
-            );
+        function editRow(button) {
+            var row = button.parentNode.parentNode;
+            var nameCell = row.querySelector('.name');
+            var priceCell = row.querySelector('.price');
+            var quantityCell = row.querySelector('.quantity');
+            var buttonsCell = row.querySelector('.buttons');
+
+            var name = nameCell.textContent.trim();
+            var price = priceCell.textContent.trim();
+            var quantity = quantityCell.textContent.trim();
+
+            nameCell.innerHTML = '<input type="text" class="form-control" name="Name" value="' + name + '" required />';
+            priceCell.innerHTML = '<input type="number" class="form-control" name="Price" value="' + price.replace(" Kč", "") + '" required /> Kč';
+            quantityCell.innerHTML = '<input type="number" class="form-control" name="Quantity" value="' + quantity.replace(" Ks", "") + '" required /> Ks';
+            buttonsCell.innerHTML = '<button type="button" class="btn btn-success btn-save" onclick="saveChanges(this)">Uložit</button>' +
+                '<button type="button" class="btn btn-success btn-discard" onclick="discardChanges(this)">Zahodit</button>';
         }
-         function removeRow(button) {
-      var row = button.parentNode.parentNode;
-      row.parentNode.removeChild(row);
-    }
+
+        function saveChanges(button) {
+            var row = button.parentNode.parentNode;
+            var nameCell = row.querySelector('.name');
+            var priceCell = row.querySelector('.price');
+            var quantityCell = row.querySelector('.quantity');
+            var buttonsCell = row.querySelector('.buttons');
+
+            var newName = nameCell.querySelector('input').value;
+            var newPrice = priceCell.querySelector('input').value;
+            var newQuantity = quantityCell.querySelector('input').value;
+
+            nameCell.innerHTML = newName;
+            priceCell.innerHTML = newPrice + ' Kč';
+            quantityCell.innerHTML = newQuantity + ' Ks';
+            buttonsCell.innerHTML = '<button type="button" class="btn" onclick="editRow(this)">' +
+                '<img src="/Images/Oranzovy_klic.png" border="0" width="22" height="22" alt="Edit" />' +
+                '</button>' +
+                '<button type="button" class="btn" onclick="removeRow(this)">' +
+                '<img src="/Images/Oranzovy_krizek.png" border="0" width="20" height="20" alt="Delete" />' +
+                '</button>';
+        }
+
+        function discardChanges(button) {
+            var row = button.parentNode.parentNode;
+            var nameCell = row.querySelector('.name');
+            var priceCell = row.querySelector('.price');
+            var quantityCell = row.querySelector('.quantity');
+            var buttonsCell = row.querySelector('.buttons');
+
+            var name = nameCell.querySelector('input').getAttribute('value');
+            var price = priceCell.querySelector('input').getAttribute('value');
+            var quantity = quantityCell.querySelector('input').getAttribute('value');
+
+            nameCell.innerHTML = name;
+            priceCell.innerHTML = price + ' Kč';
+            quantityCell.innerHTML = quantity + ' Ks';
+            buttonsCell.innerHTML = '<button type="button" class="btn" onclick="editRow(this)">' +
+                '<img src="/Images/Oranzovy_klic.png" border="0" width="22" height="22" alt="Edit" />' +
+                '</button>' +
+                '<button type="button" class="btn" onclick="removeRow(this)">' +
+                '<img src="/Images/Oranzovy_krizek.png" border="0" width="20" height="20" alt="Delete" />' +
+                '</button>';
+        }
+
+        function removeRow(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
     </script>
 </head>
-    
 
 <body>
     <div class="Tlacitko">
@@ -53,7 +87,7 @@
             <tr>
                 <th>Produkt</th>
                 <th></th>
-                <th id="centerColumn" >Cena za ks</th>
+                <th id="centerColumn">Cena za ks</th>
                 <th id="centerColumn" width="200">Aktuální množství</th>
                 <th id="centerColumn" width="200">Akce</th>
             </tr>
@@ -62,36 +96,28 @@
             @foreach (var product in Model.Products)
             {
                 <tr>
-                    <td width="250">@product.Name</td>
-                    <td width="320" id="ProductColumn"><img class="pictureproduct" src=@product.ImageUrl alt="Product Image"/></td>
+                    <td class="name" width="250">@product.Name</td>
+                    <td class="image" width="320">
+                        <img class="pictureproduct" src=@product.ImageUrl alt="Product Image" />
+                    </td>
 
-                    <td id="centerColumn" width="150">@product.Price Kč</td>
-                    <td id="centerColumn" width="150">@product.Quantity Ks</td>
-                    <td id="centerColumn">
-
-                        <button type="button" class="btn">
+                    <td class="price" id="centerColumn" width="150">@product.Price Kč</td>
+                    <td class="quantity" id="centerColumn" width="150">@product.Quantity Ks</td>
+                    <td class="buttons" id="centerColumn">
+                        <button type="button" class="btn" onclick="editRow(this)">
                             <img src="/Images/Oranzovy_klic.png" border="0" width="22" height="22" alt="Edit" />
                         </button>
 
-                        <button type="button" class="btn" class="remove-button" onclick="removeRow(this)">
+                        <button type="button" class="btn" onclick="removeRow(this)">
                             <img src="/Images/Oranzovy_krizek.png" border="0" width="20" height="20" alt="Delete" />
-
-                            
                         </button>
-
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 
-    
+
 </body>
 
 </html>
-
-
-
-
-
-
