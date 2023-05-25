@@ -17,8 +17,9 @@
                 + '<td class="name">'
                 + '<input type="text" class="form-control" name="Name" required />'
                 + '</td>'
-                + '<td class="image">'
-                + '<input type="file" class="form-control" name="Image" accept="image/jpeg,image/png" required />'
+                + '<td id="centerColumn" class="image">'
+                + '<input type="file" id="upload" class="file-input" style="display:none" required/>'
+                + '<label class="LabelUpload" for="upload">Zvolit soubor</label>'
                 + '</td>'
                 + '<td class="price">'
                 + '<input value="0" type="number" class="form-control" name="Price" required />'
@@ -74,6 +75,7 @@
 
                         <button type="button" class="btn" class="remove-button" onclick="removeRow(this)">
                             <img src="/Images/Oranzovy_krizek.png" border="0" width="20" height="20" alt="Delete" />
+
                             
                         </button>
 
