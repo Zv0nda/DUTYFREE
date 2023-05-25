@@ -1,7 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
     ViewData["Title"] = "Tabulka Produktů";
 }
 
@@ -34,13 +31,75 @@
                 + '</tr>'
             );
         }
-         function removeRow(button) {
-      var row = button.parentNode.parentNode;
-      row.parentNode.removeChild(row);
-    }
+
+            function editRow(button) {
+            var row = button.parentNode.parentNode;
+            var nameCell = row.querySelector('.name');
+            var priceCell = row.querySelector('.price');
+            var quantityCell = row.querySelector('.quantity');
+            var buttonsCell = row.querySelector('.buttons');
+
+            var name = nameCell.textContent.trim();
+            var price = priceCell.textContent.trim();
+            var quantity = quantityCell.textContent.trim();
+
+            nameCell.innerHTML = '<input type="text" class="form-control" name="Name" value="' + name + '" required />';
+            priceCell.innerHTML = '<input type="number" class="form-control" name="Price" value="' + price.replace(" Kč", "") + '" required /> Kč';
+            quantityCell.innerHTML = '<input type="number" class="form-control" name="Quantity" value="' + quantity.replace(" Ks", "") + '" required /> Ks';
+            buttonsCell.innerHTML = '<button type="button" class="btn btn-success btn-save" onclick="saveChanges(this)">Uložit</button>' +
+                '<button type="button" class="btn btn-success btn-discard" onclick="discardChanges(this)">Zahodit</button>';
+        }
+
+        function saveChanges(button) {
+            var row = button.parentNode.parentNode;
+            var nameCell = row.querySelector('.name');
+            var priceCell = row.querySelector('.price');
+            var quantityCell = row.querySelector('.quantity');
+            var buttonsCell = row.querySelector('.buttons');
+
+            var newName = nameCell.querySelector('input').value;
+            var newPrice = priceCell.querySelector('input').value;
+            var newQuantity = quantityCell.querySelector('input').value;
+
+            nameCell.innerHTML = newName;
+            priceCell.innerHTML = newPrice + ' Kč';
+            quantityCell.innerHTML = newQuantity + ' Ks';
+            buttonsCell.innerHTML = '<button type="button" class="btn" onclick="editRow(this)">' +
+                '<img src="/Images/Oranzovy_klic.png" border="0" width="22" height="22" alt="Edit" />' +
+                '</button>' +
+                '<button type="button" class="btn" onclick="removeRow(this)">' +
+                '<img src="/Images/Oranzovy_krizek.png" border="0" width="20" height="20" alt="Delete" />' +
+                '</button>';
+        }
+
+        function discardChanges(button) {
+            var row = button.parentNode.parentNode;
+            var nameCell = row.querySelector('.name');
+            var priceCell = row.querySelector('.price');
+            var quantityCell = row.querySelector('.quantity');
+            var buttonsCell = row.querySelector('.buttons');
+
+            var name = nameCell.querySelector('input').getAttribute('value');
+            var price = priceCell.querySelector('input').getAttribute('value');
+            var quantity = quantityCell.querySelector('input').getAttribute('value');
+
+            nameCell.innerHTML = name;
+            priceCell.innerHTML = price + ' Kč';
+            quantityCell.innerHTML = quantity + ' Ks';
+            buttonsCell.innerHTML = '<button type="button" class="btn" onclick="editRow(this)">' +
+                '<img src="/Images/Oranzovy_klic.png" border="0" width="22" height="22" alt="Edit" />' +
+                '</button>' +
+                '<button type="button" class="btn" onclick="removeRow(this)">' +
+                '<img src="/Images/Oranzovy_krizek.png" border="0" width="20" height="20" alt="Delete" />' +
+                '</button>';
+        }
+
+        function removeRow(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
     </script>
 </head>
-    
 
 <body>
     <div class="float-container">
@@ -94,7 +153,6 @@
             </div>
         </div>
     </div>
-        
 </body>
 
 </html>
