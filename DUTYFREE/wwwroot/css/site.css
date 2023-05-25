@@ -17,6 +17,15 @@ body {
   margin-bottom: 60px;
 }
 
+#big {
+    font-size: 20px;
+    display: inline
+}
+#small {
+    font-size: 14px;
+    display: inline
+}
+
 .btn {
     display: inline-block;
 }
@@ -34,12 +43,16 @@ body {
     
 }
 
+.LabelUpload:hover {
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.24), 0 1px 10px 0 rgba(0,0,0,0.19);
+}
 .LabelUpload {
+
     margin-right: 20px;
     border: 1px solid #ff4500;
     border-color: #ff4500;
     background: white;
-    padding: 10px 20px;
+    padding: 10px 10px;
     color: #ff4500;
     cursor: pointer;
 }
@@ -129,6 +142,15 @@ th {
     margin:0px 5px;
 }
 
+    .btn-save:hover {
+        box-shadow: 0 3px 4px 0 rgba(0,0,0,0.24), 0 1px 10px 0 rgba(0,0,0,0.19);
+        background-color: #ff4500;
+        border-radius: 0px;
+        border-color: #ff4500;
+        padding: 3px 25px;
+        margin: 0px 5px;
+    }
+
 .btn-discard {
     background-color: #ffffff;
     color:grey;
@@ -136,4 +158,13 @@ th {
     border-color: grey;
     padding: 3px 25px;
 }
+
+    .btn-discard:hover {
+        box-shadow: 0 3px 4px 0 rgba(0,0,0,0.24), 0 1px 10px 0 rgba(0,0,0,0.19);
+        background-color: #ffffff;
+        color: grey;
+        border-radius: 0px;
+        border-color: grey;
+        padding: 3px 25px;
+    }
 
