@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ProductViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 <!DOCTYPE html>
@@ -38,27 +39,61 @@
     </style>
 </head>
 <body>
-    <div class="search-bar">
-        <input type="text" id="search-input" placeholder="Zadejte název produktu" />
-        <button type="button" id="search-button">Vyhledat</button>
+ <div class="overlay">
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow  bg-black opacity-75" style="border-bottom:3px solid white">
+                <div class="container-fluid">
+                    <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index"><p id="big">DUTY</p><p id="small">FREE</p></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="Administration">Produkty</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="na_co_mas_chut">
+            <a style="color:white">Na co máš chuť?</a>
+        </div>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="" />
+            <button type="button" id="search-button">
+                <a style="color:white">Vyhledat</a> </button>
+        </div>
     </div>
 
-    <div id="product-list">
-        <div class="product-card">
-            <img src="obrazek1.jpg" alt="Produkt 1" />
-            <h4>Produkt 1</h4>
-            <div class="stock">Skladem: </div>
-            <div class="price">Cena: </div>
-            <button type="button" class="buy-button">Koupit</button>
-        </div>
+    
 
-        <div class="product-card">
-            <img src="obrazek2.jpg" alt="Produkt 2" />
-            <h4>Produkt 2</h4>
-            <div class="stock">Skladem: 5 kusů</div>
-            <div class="price">Cena: 150 Kč</div>
-            <button type="button" class="buy-button">Koupit</button>
-        </div>
+    <div id="product-list" style="margin-top:310px">
+        @foreach (var product in Model.Products!)
+        {
+            <div class="product-card">
+                <img class="pictureproducthome" src="@product.ImageUrl" />
+                <h4>@product.Name</h4>
+                <div class="stock">Skladem: @product.Quantity</div>
+                <div class="price">Cena: @product.Price</div>
+                <button type="button" class="buy-button">Koupit</button>
+            </div>
+        }
+        
+
+        
 
         <!-- Další produkty -->
     </div>
