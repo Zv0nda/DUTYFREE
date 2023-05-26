@@ -72,14 +72,20 @@
             <a style="color:white">Na co máš chuť?</a>
         </div>
         <div class="search-bar">
-            <input type="text" id="search-input" placeholder="" />
+            <input type="text" id="search-input" placeholder="Zadejte název produktu" list="product-names" />
+            <datalist id="product-names">
+                @foreach (var product in Model.Products!)
+                {
+                    <option value="@product.Name" class="option-text" />
+                }
+            </datalist>
             <button type="button" id="search-button">
                 <a style="color:white">Vyhledat</a> </button>
         </div>
     </div>
 
-    
 
+    
     <div id="product-list" style="margin-top:310px">
         @foreach (var product in Model.Products!)
         {
@@ -91,6 +97,7 @@
                 <button type="button" class="buy-button">Koupit</button>
             </div>
         }
+        
         
 
         
@@ -124,5 +131,33 @@
             }
         });
     </script>
+    <script src=""></script>
+    <script>
+        $(document).ready(function () {
+            $('#search-button').click(function () {
+                searchProducts();
+            });
+
+            $('#search-input').keypress(function (e) {
+                if (e.which === 13) {
+                    searchProducts();
+                }
+            });
+
+            function searchProducts() {
+                var searchTerm = $('#search-input').val().toLowerCase();
+                $('.product-card').each(function () {
+                    var productName = $(this).find('h4').text().toLowerCase();
+                    if (productName.includes(searchTerm)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+        });
+       
+    </script>
+
 </body>
 </html>
