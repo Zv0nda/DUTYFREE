@@ -71,10 +71,11 @@ html {
     font-size: 30px;
 }
 
+
 .overlay {
     position: absolute;
-    top:0px;
-    left:0px;
+    top: 0px;
+    left: 0px;
     background-image: url(/Images/ObrazekJahoda.png);
     background-repeat: no-repeat;
     background-size: contain;
@@ -83,7 +84,7 @@ html {
     background-size: 1920px;
     background-position-y: -250px;
     background-position-x: center;
-    z-index:0;
+    border-bottom: 4px solid #ff4500;
 }
 
 .text {
@@ -123,6 +124,7 @@ html {
     max-height: 60px;
     max-width: 60px;
     width:unset !important;
+    
 }
 .product-card {
     width: 350px;
@@ -136,6 +138,17 @@ html {
     align-items: center;
     display: inline-block;
 }
+.buy-button {
+    margin-left: 75px;
+    background-color: #ff4500;
+    border-color:#ff4500;
+    font-family:awesome;
+    
+}
+.price{
+    margin-top:50px;
+}
+
 
 .LabelUpload:hover {
     box-shadow: 0 3px 4px 0 rgba(0,0,0,0.24), 0 1px 10px 0 rgba(0,0,0,0.19);
@@ -183,6 +196,7 @@ html {
     text-align:center;
     margin:0px 10px;
 }
+
 
 table {
     border-collapse: collapse;
