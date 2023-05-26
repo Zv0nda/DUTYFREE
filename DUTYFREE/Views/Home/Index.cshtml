@@ -39,7 +39,12 @@
     </style>
 </head>
 <body>
- <div class="overlay">
+ <div class="boxOverlay">
+
+
+
+ 
+    <div class="overlay">
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow  bg-black opacity-75" style="border-bottom:3px solid white">
                 <div class="container-fluid">
@@ -83,24 +88,21 @@
                 <a style="color:white">Vyhledat</a> </button>
         </div>
     </div>
+  </div>
 
 
     
-    <div id="product-list" style="margin-top:310px">
+    <div id="product-list" style="margin-top:300px">
         @foreach (var product in Model.Products!)
         {
             <div class="product-card">
                 <img class="pictureproducthome" src="@product.ImageUrl" />
                 <h4>@product.Name</h4>
-                <div class="stock">Skladem: @product.Quantity</div>
-                <div class="price">Cena: @product.Price</div>
-                <button type="button" class="buy-button">Koupit</button>
+                <div class="stock">Skladem: @product.Quantity Ks</div>
+                <div class="price"><a style="color:#ff4500">Cena: @product.Price Kč</a>  <button type="button" class="buy-button"><a style="color:white">Koupit</a></button></div>
+
             </div>
         }
-        
-        
-
-        
 
         <!-- Další produkty -->
     </div>
