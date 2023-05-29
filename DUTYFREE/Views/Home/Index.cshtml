@@ -7,13 +7,7 @@
 <head>
     <title>Přehled produktů</title>
     <style>
-        .product-card {
-            width: 250px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            padding: 10px;
-            margin-bottom: 20px;
-        }
+       
 
             .product-card img {
                 width: 100%;
@@ -97,9 +91,9 @@
         {
             <div class="product-card">
                 <img class="pictureproducthome" src="@product.ImageUrl" />
-                <h4>@product.Name</h4>
+                <a id="ProductName">@product.Name</a>
                 <div class="stock">Skladem: @product.Quantity Ks</div>
-                <div class="price"><a style="color:#ff4500">Cena: @product.Price Kč</a>  <button type="button" class="buy-button"><a style="color:white">Koupit</a></button></div>
+                <div class="price"><a style="color:#ff1111">@product.Price Kč</a>  <button type="button" class="buy-button"><a style="color:white">Koupit</a></button></div>
 
             </div>
         }
