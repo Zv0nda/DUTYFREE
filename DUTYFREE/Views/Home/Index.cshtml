@@ -91,7 +91,7 @@
         {
             <div class="product-card">
                 <img class="pictureproducthome" src="@product.ImageUrl" />
-                <a id="ProductName">@product.Name</a>
+                <p id="ProductName">@product.Name</p>
                 <div class="stock">Skladem: @product.Quantity Ks</div>
                 <div class="price"><a style="color:#ff1111">@product.Price Kč</a>  <button type="button" class="buy-button"><a style="color:white">Koupit</a></button></div>
 
@@ -104,12 +104,20 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
+            var isTyping = false;
+
             $('#search-button').click(function () {
                 searchProducts();
             });
 
-            $('#search-input').keypress(function (e) {
-                if (e.which === 13) {
+            $('#search-input').keydown(function (e) {
+                if (!isTyping) {
+                    isTyping = true;
+                }co
+            });
+
+            $('#search-input').keyup(function (e) {
+                if (isTyping) {
                     searchProducts();
                 }
             });
@@ -117,7 +125,7 @@
             function searchProducts() {
                 var searchTerm = $('#search-input').val().toLowerCase();
                 $('.product-card').each(function () {
-                    var productName = $(this).find('h4').text().toLowerCase();
+                    var productName = $(this).find('p').text().toLowerCase();
                     if (productName.includes(searchTerm)) {
                         $(this).show();
                     } else {
@@ -126,33 +134,6 @@
                 });
             }
         });
-    </script>
-    <script src=""></script>
-    <script>
-        $(document).ready(function () {
-            $('#search-button').click(function () {
-                searchProducts();
-            });
-
-            $('#search-input').keypress(function (e) {
-                if (e.which === 13) {
-                    searchProducts();
-                }
-            });
-
-            function searchProducts() {
-                var searchTerm = $('#search-input').val().toLowerCase();
-                $('.product-card').each(function () {
-                    var productName = $(this).find('h4').text().toLowerCase();
-                    if (productName.includes(searchTerm)) {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
-                });
-            }
-        });
-       
     </script>
 
 </body>
