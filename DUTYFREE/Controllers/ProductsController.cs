@@ -1,42 +1,49 @@
 ﻿using DUTYFREE.Models.Products;
 using Microsoft.AspNetCore.Mvc;
 using DUTYFREE.ViewModels.Products;
+using System.ComponentModel.DataAnnotations.Schema;
+using DUTYFREE.Data;
+using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.SqlServer.Server;
+using System.Data;
+using Microsoft.Data.SqlClient;
+using Dapper;
 
 namespace DUTYFREE.Controllers
 {
     public class ProductsController : Controller
     {
-        public static List<Product> _products = new List<Product> { new Product { Name = "Pepsi", Price = 30 , ProductID = 0, Quantity = 6, ImageUrl = "/Images/Pepsi_obrazek.png", Format = "pepsi-image"},
-                                                                     new Product { Name = "Cola", Price = 36, ProductID = 1, ImageUrl ="/Images/Cola_obrazek.png", Format = "cola-image" },
-                                                                     new Product { Name = "Tatranka", Price = 10, ProductID = 2, ImageUrl="/Images/Tatranka_obrazek.png", Format = "tatranka-image"},
-                                                                     new Product { Name = "Corny", Price = 12, ProductID = 3, ImageUrl = "/Images/Corny_obrazek.png", Format = "corny-image" }};
-
-
         public IActionResult Administration()
         {
             var vm = new AdminViewModel();
-            vm.Products = _products;
+            vm.Products = Database.GetProducts().ToList();
             return View(vm);
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var product = _products.FirstOrDefault(p => p.ProductID == id);
-            if (product == null) return NotFound();
+            var product = Database.GetProductById(id);
+            if (product == null)
+                return NotFound();
+
             return View(product);
         }
 
         [HttpPost]
-        public IActionResult Edit(Product updatedProduct)
+        public IActionResult Edit(Product existingProduct)
         {
-            var existingProduct = _products.FirstOrDefault(p => p.ProductID == updatedProduct.ProductID);
-            if (existingProduct == null)
+            var updatedProduct = Database.GetProductById(existingProduct.ProductID);
+            if (updatedProduct == null)
                 return NotFound();
 
-            existingProduct.Name = updatedProduct.Name;
-            existingProduct.Price = updatedProduct.Price;
+            updatedProduct.Name = existingProduct.Name;
+            updatedProduct.Price = existingProduct.Price;
+            updatedProduct.Quantity = existingProduct.Quantity;
+            updatedProduct.ImageUrl = existingProduct.ImageUrl;
 
+            Database.EditProduct(existingProduct.ProductID, existingProduct.Name, existingProduct.ImageUrl, existingProduct.Quantity, existingProduct.Price);
             return RedirectToAction("Administration");
         }
 
@@ -46,36 +53,25 @@ namespace DUTYFREE.Controllers
             return View();
         }
 
-         [HttpPost]
-         public IActionResult Insert(Product newProduct)
-         {
-             newProduct.ProductID = _products.Max(p => p.ProductID) + 1;
-             _products.Add(newProduct);
-
-             return RedirectToAction("Administration");
-         }
-
-         [HttpGet]
-         public IActionResult Delete(int id)
-         {
-             var product = _products.FirstOrDefault(p => p.ProductID == id);
-             if (product == null)
-                 return NotFound();
-
-             return View(product);
-         }
-
         [HttpPost]
-         public IActionResult DeleteConfirmed(int id)
-         {
-             var product = _products.FirstOrDefault(p => p.ProductID == id);
-             if (product == null)
-                 return NotFound();
+        public IActionResult Insert(Product newProduct)
+        {
+            Database.InsertProduct(newProduct.Name, newProduct.ImageUrl, newProduct.Quantity, newProduct.Price);
+            return RedirectToAction("Administration");
+        }
 
-             _products.Remove(product);
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            Product product = Database.GetProductById(id);
+            if (product is null) return NotFound();
 
-             return RedirectToAction("Administration");
-         }
+            using (var connection = new SqlConnection(Database.connectionString))
+            {
+                connection.Execute("ProcProductDelete", new { ProductId = id }, commandType: CommandType.StoredProcedure);
+            }
+            return NoContent();
+        }
 
         public IActionResult Index()
         {
