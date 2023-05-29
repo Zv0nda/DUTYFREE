@@ -1,11 +1,92 @@
-﻿@{
+﻿@model AdminViewModel
+
+@{
     ViewData["Title"] = "Tabulka Produktů";
 }
 
-<html>
-<head>
-    <title>Přidání produktu</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div class="overlay">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow  bg-black opacity-75" style="border-bottom:3px solid white">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index"><p id="big">DUTY</p><p id="small">FREE</p></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="Administration">Produkty</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="text">
+        <a style="color:white">Vyhledávač</a>
+    </div>
+</div>
+
+<div class="float-container">
+
+    <div class="float-child blue">
+        <div class="Tlacitko ">
+            <button onclick="createRow()" type="button" class="circle-button">
+                <span class="plus"></span>
+            </button>
+
+        </div>
+
+        <div class="box">
+            <table id="myTable">
+                <thead>
+                    <tr>
+                        <th>Produkt</th>
+                        <th></th>
+                        <th id="centerColumn">Cena za ks</th>
+                        <th id="centerColumn" width="200">Aktuální množství</th>
+                        <th id="centerColumn" width="200">Akce</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var product in Model.Products)
+                    {
+                        <tr>
+                            <td class="name" width="250">@product.Name</td>
+                            <td class="image" width="320">
+                                <img class="pictureproduct" src=@product.ImageUrl alt="Product Image" />
+                            </td>
+                            <td class="price" id="centerColumn" width="150">@product.Price Kč</td>
+                            <td class="quantity" id="centerColumn" width="150">@product.Quantity Ks</td>
+                            <td class="buttons" id="centerColumn">
+                                <button type="button" class="btn" onclick="editRow(this)">
+                                    <img src="/Images/Oranzovy_klic.png" border="0" width="22" height="22" alt="Edit" />
+                                </button>
+                                <button type="button" class="btn btn-delete" data-id="@product.ProductID">
+                                    <img src="/Images/Oranzovy_krizek.png" border="0" width="20" height="20" alt="Delete" />
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
     <script>
         function createRow() {
             const table = $('table tbody');
@@ -32,7 +113,7 @@
             );
         }
 
-            function editRow(button) {
+        function editRow(button) {
             var row = button.parentNode.parentNode;
             var nameCell = row.querySelector('.name');
             var priceCell = row.querySelector('.price');
@@ -94,95 +175,10 @@
                 '</button>';
         }
 
-        function removeRow(button) {
-            var row = button.parentNode.parentNode;
-            row.parentNode.removeChild(row);
-        }
+        $(document).ready(() => {
+            $(document).on('click', '.btn-delete', deleteProduct);
+        });
+
+
     </script>
-</head>
-
-<body>
-    <div class="overlay">
-        <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow  bg-black opacity-75" style="border-bottom:3px solid white">
-                <div class="container-fluid">
-                    <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index"><p id="big">DUTY</p><p id="small">FREE</p></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1">
-
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="Administration">Produkty</a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
-        <div class="text">
-            <a style="color:white">Vyhledávač</a>
-        </div>
-    </div>
-
-    <div class="float-container">
-
-        <div class="float-child blue">
-            <div class="Tlacitko ">
-                <button onclick="createRow()" type="button" class="circle-button">
-                    <span class="plus"></span>
-                </button>
-
-            </div>
-
-            <div class="box">
-                <table id="myTable">
-                    <thead>
-                        <tr>
-                            <th>Produkt</th>
-                            <th></th>
-                            <th id="centerColumn">Cena za ks</th>
-                            <th id="centerColumn" width="200">Aktuální množství</th>
-                            <th id="centerColumn" width="200">Akce</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach (var product in Model.Products)
-                        {
-                            <tr>
-                                <td class="name" width="250">@product.Name</td>
-                                <td class="image" width="320">
-                                    <img class="pictureproduct" src=@product.ImageUrl alt="Product Image" />
-                                </td>
-                                <td class="price" id="centerColumn" width="150">@product.Price Kč</td>
-                                <td class="quantity" id="centerColumn" width="150">@product.Quantity Ks</td>
-                                <td class="buttons" id="centerColumn">
-                                    <button type="button" class="btn" onclick="editRow(this)">
-                                        <img src="/Images/Oranzovy_klic.png" border="0" width="22" height="22" alt="Edit" />
-                                    </button>
-                                        <button type="button" class="btn" onclick="removeRow(this)">
-                                            <img src="/Images/Oranzovy_krizek.png" border="0" width="20" height="20" alt="Delete" />
-                                        </button>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</body>
-
-</html>
+}
