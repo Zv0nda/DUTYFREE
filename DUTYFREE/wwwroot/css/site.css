@@ -49,13 +49,12 @@ html {
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    text-align: center;
-    font-family: awesome;
+    text-align: center;    
     font-size: 20px;
 }
 #search-button {
     background-color: #ff4500;
-    font-family: awesome;
+    padding: 2px 7px;
 }
 #search-input{
     width:640px;
@@ -71,10 +70,11 @@ html {
     font-size: 30px;
 }
 
+
 .overlay {
     position: absolute;
-    top:0px;
-    left:0px;
+    top: 0px;
+    left: 0px;
     background-image: url(/Images/ObrazekJahoda.png);
     background-repeat: no-repeat;
     background-size: contain;
@@ -83,7 +83,7 @@ html {
     background-size: 1920px;
     background-position-y: -250px;
     background-position-x: center;
-    z-index:0;
+    border-bottom: 4px solid #ff1111;
 }
 
 .text {
@@ -120,12 +120,22 @@ html {
     
 }
 .pictureproducthome {
-    max-height: 60px;
-    max-width: 60px;
-    width:unset !important;
+    max-height: 90px;
+    max-width: 90px;
+    width: unset !important;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+#ProductName {
+    font-size: 25px; 
+    display:flex;
+    justify-content:space-around;
+    
 }
 .product-card {
-    width: 350px;
+    width: 300px;
     height: 250px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -135,7 +145,27 @@ html {
     flex-direction: column;
     align-items: center;
     display: inline-block;
+    margin-bottom:20px;
+    border-top-color:orange;
+    border-top-width:2px;
+    border-bottom-width:3px;
+    
 }
+.buy-button {
+    margin-left: 135px;
+    background-color: #ff4500;
+    border-color:#ff4500;      
+    border-color: #ff4500;
+    padding: 3px 24px ;      
+}
+.stock{
+    margin-top:5px;
+    color:lawngreen;
+}
+.price{
+    margin-top:25px;
+}
+
 
 .LabelUpload:hover {
     box-shadow: 0 3px 4px 0 rgba(0,0,0,0.24), 0 1px 10px 0 rgba(0,0,0,0.19);
@@ -179,10 +209,15 @@ html {
         transform: translate(-50%, -50%);
     }
 
+#product-list{
+    width:auto;
+}
+
 #ProductColumn{
     text-align:center;
     margin:0px 10px;
 }
+
 
 table {
     border-collapse: collapse;
