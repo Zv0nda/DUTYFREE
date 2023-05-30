@@ -24,7 +24,7 @@ namespace DUTYFREE.Data
             using (var db = new SqlConnection(connectionString))
             {
                 string query = "EXEC ProcGetProductById @ProductId";
-                var parameters = new { ProductId = productId };
+                var parameters = new { Productd = productId };
                 return db.QueryFirstOrDefault<int>(query, parameters);
             }
         }
@@ -38,13 +38,17 @@ namespace DUTYFREE.Data
             }
         }
 
-        public static void InsertProduct(string name, string imageUrl, int quantity, decimal price)
+        public static Product InsertProduct(string name, string imageUrl, int quantity, decimal price)
         {
             using (var db = new SqlConnection(connectionString))
             {
-                string query = "EXEC ProcProductInsert @Name, @ImageUrl, @Quantity, @Price";
-                var parameters = new { Name = name, ImageUrl = imageUrl, Quantity = quantity, Price = price };
-                db.Execute(query, parameters);
+                 return db.Query<Product>("ProcProductInsert", 
+                    new { 
+                        Name = name, 
+                        ImageUrl = imageUrl, 
+                        Quantity = quantity, 
+                        Price = price 
+                    }, commandType: CommandType.StoredProcedure).Single();
             }
         }
 

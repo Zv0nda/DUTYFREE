@@ -270,14 +270,15 @@ th {
     margin:0px 5px;
 }
 
-    .btn-save:hover {
+.btn-save:hover {
         box-shadow: 0 3px 4px 0 rgba(0,0,0,0.24), 0 1px 10px 0 rgba(0,0,0,0.19);
         background-color: #ff4500;
         border-radius: 0px;
         border-color: #ff4500;
         padding: 3px 25px;
         margin: 0px 5px;
-    }
+}
+
 
 .btn-discard {
     background-color: #ffffff;
