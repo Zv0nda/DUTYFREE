@@ -21,6 +21,11 @@ namespace DUTYFREE.Controllers
             return View(vm);
         }
 
+        public IActionResult Orders()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Edit(int id)
         {
