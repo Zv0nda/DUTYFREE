@@ -62,7 +62,7 @@ html {
 }
 .na_co_mas_chut {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
@@ -72,7 +72,7 @@ html {
 }
 .hashtagy{
     text-align:center;
-    margin-top:310px;
+    margin-top:210px;
     font-size:12.5px;
 }
 
@@ -84,7 +84,7 @@ html {
     background-image: url(/Images/ObrazekJahoda.png);
     background-repeat: no-repeat;    
     width: 100%;
-    height: 400px;
+    height: 300px;
     background-size: 1920px;
     background-position-y: -250px;
     background-position-x: center;
