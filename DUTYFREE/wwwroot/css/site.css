@@ -295,4 +295,13 @@ th {
         border-color: grey;
         padding: 3px 25px;
     }
+.row {
+    display: flex; 
+}
+
+.column {
+    flex: 1; 
+    padding: 10px; 
+    border: 1px solid black; 
+}
 
