@@ -52,17 +52,12 @@ namespace DUTYFREE.Controllers
             return RedirectToAction("Administration");
         }
 
-        [HttpGet]
-        public IActionResult Insert()
-        {
-            return View();
-        }
 
         [HttpPost]
-        public IActionResult Insert(Product newProduct)
+        public IActionResult Insert(Product product)
         {
-            Database.InsertProduct(newProduct.Name, newProduct.ImageUrl, newProduct.Quantity, newProduct.Price);
-            return RedirectToAction("Administration");
+            Database.InsertProduct(product.Name, product.ImageUrl, product.Quantity, product.Price);
+            return Ok();
         }
 
         [HttpDelete]
