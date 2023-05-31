@@ -55,15 +55,15 @@ html {
 .float-child.blue {
     margin-top: 300px;
 }
-.form-control{
-    margin-left:220px;
+.form-control-kalendar{
+    margin-left:200px;
+    border:solid;
+    border-width:1px;
 }
 .col-md-2{
     width:70px;
 }
-.texticek{
-    margin-px;
-}
+
 
 .navbar2 {
     position: absolute;
