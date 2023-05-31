@@ -133,7 +133,7 @@
             nameCell.innerHTML = '<input type="text" class="form-control NameInput" name="Name" value="' + name + '" required />';
             priceCell.innerHTML = '<input type="number" class="form-control PriceInput" name="Price" value="' + price.replace(" Kč", "") + '" required /> Kč';
             quantityCell.innerHTML = '<input type="number" class="form-control QuantityInput" name="Quantity" value="' + quantity.replace(" Ks", "") + '" required /> Ks';
-            buttonsCell.innerHTML = '<button type="button" class="btn btn-success" onclick="saveChanges(this)">Uložit</button>' +
+            buttonsCell.innerHTML = '<button type="button" class="btn btn-ulozit" onclick="saveChanges(this)"><a style="color:white">Uložit</a></button>' +
                 '<button type="button" class="btn btn-success btn-discard" onclick="discardChanges(this)">Zahodit</button>';
         }
 

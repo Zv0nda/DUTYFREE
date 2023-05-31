@@ -68,7 +68,7 @@
         @foreach (var product in Model.Products!)
         {
             <div class="product-card">
-                <img class="pictureproducthome" src="@product.ImageUrl" />
+                <img class="pictureproducthome" src="~/@product.ImageUrl" />
                 <p id="ProductName">@product.Name</p>
                 <div class="stock">Skladem: @product.Quantity Ks</div>
                 <div class="price"><a style="color:#ff1111">@product.Price Kč</a> </div>

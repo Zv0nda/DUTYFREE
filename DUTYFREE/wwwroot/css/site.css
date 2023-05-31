@@ -154,12 +154,13 @@ html {
 
 .pictureproduct{       
     max-height:60px;
-    max-width:60px;     
+    max-width:60px; 
+    
 }
 .pictureproducthome {
     max-height: 90px;
     max-width: 90px;
-    min-height:60px;
+    min-height:90px !important;
     width: unset !important;
     display: block;
     margin-left: auto;
