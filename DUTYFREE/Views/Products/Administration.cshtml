@@ -91,27 +91,28 @@
 </div>
 
 @section Scripts{
-    <script>
+    <script>  
+
         function createRow() {
             const table = $('table tbody');
             table.prepend(
                 '<tr>'
                 + '<td class="name">'
-                + '<input type="text" class="form-control" name="Name" required />'
+                + '<input type="text" class="form-control Nazev" name="Name" required />'
                 + '</td>'
                 + '<td id="centerColumn" class="image">'
-                + '<input type="file" id="upload" class="file-input" style="display:none" required/>'
+                + '<input type="file" name="Image" id="upload" class="file-input Obrazek" style="display:none" required/>'
                 + '<label class="LabelUpload" for="upload">Zvolit soubor</label>'
                 + '</td>'
                 + '<td class="price">'
-                + '<input value="0" type="number" class="form-control" name="Price" required />'
+                + '<input value="0" type="number" class="form-control Cena" name="Price" required />'
                 + '</td>'
                 + '<td class="quantity">'
-                + '<input  value="0" placeholder="Kč" type="number" class="form-control" name="Quantity" required />'
+                + '<input  value="0" placeholder="Ks" type="number" class="form-control Kvantita" name="Quantity" required />'
                 + '</td>'
                 + '<td class="buttons" id="centerColumn">'
-                + '<button type="button" class="btn btn-success btn-save">Uložit</button>'
-                + '<button type="button" class="btn btn-success btn-discard">Zahodit</button>'
+                + '<button type="button" class="btn btn-success btn-save" onclick="insertProduct">Uložit</button>'
+                + '<button type="button" class="btn btn-success btn-discard" onclick="DiscardRow">Zahodit</button>'
                 + '</td>'
                 + '</tr>'
             );
@@ -131,7 +132,7 @@
             nameCell.innerHTML = '<input type="text" class="form-control" name="Name" value="' + name + '" required />';
             priceCell.innerHTML = '<input type="number" class="form-control" name="Price" value="' + price.replace(" Kč", "") + '" required /> Kč';
             quantityCell.innerHTML = '<input type="number" class="form-control" name="Quantity" value="' + quantity.replace(" Ks", "") + '" required /> Ks';
-            buttonsCell.innerHTML = '<button type="button" class="btn btn-success btn-save" onclick="saveChanges(this)">Uložit</button>' +
+            buttonsCell.innerHTML = '<button type="button" class="btn btn-success">Uložit</button>' +
                 '<button type="button" class="btn btn-success btn-discard" onclick="discardChanges(this)">Zahodit</button>';
         }
 
@@ -179,8 +180,17 @@
                 '</button>';
         }
 
+        function removeRow(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+
         $(document).ready(() => {
+            $(document).on('click', '.btn-save', insertProduct);
             $(document).on('click', '.btn-delete', deleteProduct);
+            $("body").on("click", ".btn-discard", function () {
+                $(this).closest("tr").remove();
+            });
         });
 
 
