@@ -6,22 +6,67 @@
 
 
 
- 
-<div class="container" style="margin-top: 310px; display:inline-flex">
-    <div class="col-md-5" style="float:left;">
+    <title>@ViewData["Title"]</title>
+    
+
+    <div class="overlay">
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow  bg-black opacity-75" style="border-bottom:3px solid white">
+                <div class="container-fluid">
+                    <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index"><p id="big">DUTY</p><p id="small">FREE</p></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="Administration">Produkty</a>
+                            </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="Orders">Objednavky</a>
+                                </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="text">
+            <a style="color:white">Moje objednávky</a>
+        </div>
+    </div>
+
+<div class="container" style="margin-top: 310px; display: inline-flex">
+    <div class="col-md-4">
+
         <div class="form-group">
-            <div class="input-group date" id="datetimepicker6">
-                <input type="date" class="form-control" />
+            <div class="input-group date" id="datetimepicker6" >   
+                <p style="color:gray; margin-left:200px; margin-top:3px">Od </p><div class="col-md-2" style="width:10px"></div>
+                <input type="date" class="form-control" style="height: 30px; width: 150px;color:gray" />
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
             </div>
         </div>
     </div>
-    <div class="col-md-5" style="float:right;">
+
+    <div class="col-md-2"></div> 
+    <div class="col-md-4">
+
         <div class="form-group">
             <div class="input-group date" id="datetimepicker7">
-                <input type="date" class="form-control" />
+                <input type="date" class="form-control" style="height: 30px; width: 150px;" />
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -35,7 +80,7 @@
         <div class="box">
             <table id="myTable">
                 <thead>
-                    <tr>
+                    <tr>                        
                         <th id="centerColumn" width="150">Datum</th>
                         <th id="centerColumn" width="100">Čas</th>
                         <th id="centerColumn" width="200">Produkt</th>
@@ -46,6 +91,8 @@
         </div>
     </div>
 </div>
+
+
 
 @section Scripts{
     <script type="text/javascript">
