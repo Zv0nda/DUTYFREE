@@ -7,7 +7,27 @@ html {
     font-size: 16px;
   }
 }
+.product-card img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
 
+.product-card h4 {
+    margin: 0;
+}
+
+.product-card .stock {
+    margin-bottom: 10px;
+}
+
+.product-card .price {
+    font-weight: bold;
+}
+
+.search-bar {
+    margin-bottom: 20px;
+}
 html {
   position: relative;
   min-height: 100%;

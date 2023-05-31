@@ -91,7 +91,7 @@
 </div>
 
 @section Scripts{
-    <script>
+    <script>  
 
         function createRow() {
             const table = $('table tbody');
@@ -111,8 +111,8 @@
                 + '<input  value="0" placeholder="Ks" type="number" class="form-control Kvantita" name="Quantity" required />'
                 + '</td>'
                 + '<td class="buttons" id="centerColumn">'
-                + '<button type="button" class="btn btn-success btn-save" onclick="insertProduct()">Uložit</button>'
-                + '<button type="button" class="btn btn-success btn-discard">Zahodit</button>'
+                + '<button type="button" class="btn btn-success btn-save" onclick="insertProduct">Uložit</button>'
+                + '<button type="button" class="btn btn-success btn-discard" onclick="DiscardRow">Zahodit</button>'
                 + '</td>'
                 + '</tr>'
             );
@@ -132,7 +132,7 @@
             nameCell.innerHTML = '<input type="text" class="form-control" name="Name" value="' + name + '" required />';
             priceCell.innerHTML = '<input type="number" class="form-control" name="Price" value="' + price.replace(" Kč", "") + '" required /> Kč';
             quantityCell.innerHTML = '<input type="number" class="form-control" name="Quantity" value="' + quantity.replace(" Ks", "") + '" required /> Ks';
-            buttonsCell.innerHTML = '<button type="button" class="btn btn-success btn-save" onclick="saveChanges(this)">Uložit</button>' +
+            buttonsCell.innerHTML = '<button type="button" class="btn btn-success">Uložit</button>' +
                 '<button type="button" class="btn btn-success btn-discard" onclick="discardChanges(this)">Zahodit</button>';
         }
 
@@ -180,9 +180,17 @@
                 '</button>';
         }
 
+        function removeRow(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+
         $(document).ready(() => {
             $(document).on('click', '.btn-save', insertProduct);
             $(document).on('click', '.btn-delete', deleteProduct);
+            $("body").on("click", ".btn-discard", function () {
+                $(this).closest("tr").remove();
+            });
         });
 
 

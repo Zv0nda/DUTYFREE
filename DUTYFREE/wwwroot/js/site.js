@@ -16,6 +16,7 @@
 	});
 }
 
+
 function insertProduct() {
     // Získání hodnot z formuláře
     let row = $(this).closest("tr");
@@ -40,6 +41,7 @@ function insertProduct() {
         success: function (response) {
             // Úspěšné vložení - aktualizace tabulky nebo jiná odezva
             console.log('Produkt byl úspěšně vložen.');
+            window.location.reload(true);
         },
         error: function (xhr, status, error) {
             // Chyba při vkládání - zpracování chybového stavu nebo zobrazení chybového hlášení
