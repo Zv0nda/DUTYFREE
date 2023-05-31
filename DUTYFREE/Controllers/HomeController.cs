@@ -1,4 +1,5 @@
-﻿using DUTYFREE.Models;
+﻿using DUTYFREE.Data;
+using DUTYFREE.Models;
 using DUTYFREE.Models.Products;
 using DUTYFREE.ViewModels.Products;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,7 @@ namespace DUTYFREE.Controllers
 
         public IActionResult Index()
         {
-            return View(new ProductViewModel() { Products= _products });
+            return View(new ProductViewModel() { Products= Database.GetProducts().ToList()});
         }
 
         public IActionResult Privacy()

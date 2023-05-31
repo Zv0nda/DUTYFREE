@@ -55,6 +55,7 @@ html {
 .float-child.blue {
     margin-top: 300px;
 }
+
 .form-control-kalendar{
     margin-left:200px;
     border:solid;
@@ -67,7 +68,6 @@ html {
    margin-top:20vh !important;
    border: none!important;
 }
-
 
 .navbar2 {
     position: absolute;
@@ -159,7 +159,7 @@ html {
 .pictureproducthome {
     max-height: 90px;
     max-width: 90px;
-    min-height:90px;
+    min-height:60px;
     width: unset !important;
     display: block;
     margin-left: auto;
