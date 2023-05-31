@@ -67,10 +67,10 @@
                 <tbody>
                     @foreach (var product in Model.Products)
                     {
-                        <tr>
+                        <tr data-id="@product.ProductID">
                             <td class="name" width="250">@product.Name</td>
                             <td class="image" width="320">
-                                <img class="pictureproduct" src=@product.ImageUrl alt="Product Image" />
+                                <img class="pictureproduct" src=~/@product.ImageUrl alt="Product Image" />
                             </td>
                             <td class="price" id="centerColumn" width="150">@product.Price Kč</td>
                             <td class="quantity" id="centerColumn" width="150">@product.Quantity Ks</td>
@@ -129,34 +129,50 @@
             var price = priceCell.textContent.trim();
             var quantity = quantityCell.textContent.trim();
 
-            nameCell.innerHTML = '<input type="text" class="form-control" name="Name" value="' + name + '" required />';
-            priceCell.innerHTML = '<input type="number" class="form-control" name="Price" value="' + price.replace(" Kč", "") + '" required /> Kč';
-            quantityCell.innerHTML = '<input type="number" class="form-control" name="Quantity" value="' + quantity.replace(" Ks", "") + '" required /> Ks';
-            buttonsCell.innerHTML = '<button type="button" class="btn btn-success">Uložit</button>' +
+            nameCell.innerHTML = '<input type="text" class="form-control NameInput" name="Name" value="' + name + '" required />';
+            priceCell.innerHTML = '<input type="number" class="form-control PriceInput" name="Price" value="' + price.replace(" Kč", "") + '" required /> Kč';
+            quantityCell.innerHTML = '<input type="number" class="form-control QuantityInput" name="Quantity" value="' + quantity.replace(" Ks", "") + '" required /> Ks';
+            buttonsCell.innerHTML = '<button type="button" class="btn btn-success" onclick="saveChanges(this)">Uložit</button>' +
                 '<button type="button" class="btn btn-success btn-discard" onclick="discardChanges(this)">Zahodit</button>';
         }
 
         function saveChanges(button) {
             var row = button.parentNode.parentNode;
-            var nameCell = row.querySelector('.name');
-            var priceCell = row.querySelector('.price');
-            var quantityCell = row.querySelector('.quantity');
+            var nameCell = row.querySelector('.NameInput');
+            var priceCell = row.querySelector('.PriceInput');
+            var quantityCell = row.querySelector('.QuantityInput');
             var buttonsCell = row.querySelector('.buttons');
 
-            var newName = nameCell.querySelector('input').value;
-            var newPrice = priceCell.querySelector('input').value;
-            var newQuantity = quantityCell.querySelector('input').value;
+            var newName = nameCell.value.trim();
+            var newPrice = priceCell.value.trim();
+            var newQuantity = quantityCell.value.trim();
+            var productId = row.getAttribute('data-id');
 
-            nameCell.innerHTML = newName;
-            priceCell.innerHTML = newPrice + ' Kč';
-            quantityCell.innerHTML = newQuantity + ' Ks';
-            buttonsCell.innerHTML = '<button type="button" class="btn" onclick="editRow(this)">' +
-                '<img src="/Images/Oranzovy_klic.png" border="0" width="22" height="22" alt="Edit" />' +
-                '</button>' +
-                '<button type="button" class="btn" onclick="removeRow(this)">' +
-                '<img src="/Images/Oranzovy_krizek.png" border="0" width="20" height="20" alt="Delete" />' +
-                '</button>';
+            let product = new FormData();
+            product.append("ProductId", productId);
+            product.append("Name", newName);
+            product.append("Quantity", newQuantity);
+            product.append("Price", newPrice);
+
+            // Call the server-side function to update the product
+            $.ajax({
+                url: '/Products/Edit',
+                type: 'POST',
+                data: product,
+                processData: false,
+                contentType: false,
+                success: function () {
+                    // Update the table cell values on success
+                    console.log("ok");
+                    window.location.reload(true);
+                },
+                error: function (error) {
+                    console.log(error);
+                },
+            });
         }
+
+
 
         function discardChanges(button) {
             var row = button.parentNode.parentNode;

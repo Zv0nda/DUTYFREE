@@ -22,7 +22,7 @@ function insertProduct() {
     let row = $(this).closest("tr");
     var name = row.find(".Nazev").val();
     console.log(name);
-    var imageUrl = row.find(".Obrazek").val();
+    var imageUrl = row.find(".Obrazek").prop("files")[0];
     var quantity = row.find(".Kvantita").val();
     var price = row.find(".Cena").val();
     let product = new FormData();

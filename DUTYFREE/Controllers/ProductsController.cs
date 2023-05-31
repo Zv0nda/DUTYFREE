@@ -9,11 +9,19 @@ using Microsoft.SqlServer.Server;
 using System.Data;
 using Microsoft.Data.SqlClient;
 using Dapper;
+using static System.Net.Mime.MediaTypeNames;
+using Microsoft.AspNetCore.Hosting;
 
 namespace DUTYFREE.Controllers
 {
     public class ProductsController : Controller
     {
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public ProductsController(IWebHostEnvironment webHost)
+        {
+            _webHostEnvironment = webHost;
+        }
+
         public IActionResult Administration()
         {
             var vm = new AdminViewModel();
@@ -52,11 +60,29 @@ namespace DUTYFREE.Controllers
             return RedirectToAction("Administration");
         }
 
-
-        [HttpPost]
-        public IActionResult Insert(Product product)
+        private string UploadImage(Product product)
         {
-            Database.InsertProduct(product.Name, product.ImageUrl, product.Quantity, product.Price);
+            string uniqueFileName = "Images/";
+            if (product.Image != null)
+            {
+                uniqueFileName = product.Image.FileName;
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "Images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + uniqueFileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    product.Image.CopyToAsync(fileStream);
+                }
+                uniqueFileName = "Images/" + uniqueFileName;
+            }
+
+            return uniqueFileName;
+        }
+
+            [HttpPost]
+        public IActionResult Insert(Product product)
+        { 
+            Database.InsertProduct(product.Name, UploadImage(product), product.Quantity, product.Price);
             return Ok();
         }
 
