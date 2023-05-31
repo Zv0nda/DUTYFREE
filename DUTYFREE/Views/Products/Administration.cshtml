@@ -129,6 +129,7 @@
             var price = priceCell.textContent.trim();
             var quantity = quantityCell.textContent.trim();
 
+
             nameCell.innerHTML = '<input type="text" class="form-control NameInput" name="Name" value="' + name + '" required />';
             priceCell.innerHTML = '<input type="number" class="form-control PriceInput" name="Price" value="' + price.replace(" Kč", "") + '" required /> Kč';
             quantityCell.innerHTML = '<input type="number" class="form-control QuantityInput" name="Quantity" value="' + quantity.replace(" Ks", "") + '" required /> Ks';
