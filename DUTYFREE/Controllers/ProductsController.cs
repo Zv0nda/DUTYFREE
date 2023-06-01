@@ -26,6 +26,7 @@ namespace DUTYFREE.Controllers
         {
             var vm = new AdminViewModel();
             vm.Products = Database.GetProducts().ToList();
+            vm.Products = vm.Products.OrderByDescending(n => n.ProductID).ToList();
             return View(vm);
         }
 
