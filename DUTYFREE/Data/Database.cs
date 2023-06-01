@@ -2,6 +2,7 @@
 using DUTYFREE.Models.Products;
 using System.Data;
 using Microsoft.Data.SqlClient;
+using DUTYFREE.Models.Users;
 
 namespace DUTYFREE.Data
 {
@@ -9,6 +10,16 @@ namespace DUTYFREE.Data
     { 
         internal static string connectionString = "Data Source=.;Initial Catalog=dutyfree.db;Integrated Security=True;TrustServerCertificate=True;";
 
+        public static List<User> GetAllUsers()
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var query = "SELECT * FROM Users";
+                var Users = connection.Query<User>(query).ToList();
+                return Users;
+            }
+        }
         public static Product GetProductById(int productId)
         {
             using(IDbConnection db = new SqlConnection(connectionString))

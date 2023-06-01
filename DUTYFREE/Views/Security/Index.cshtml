@@ -1,14 +1,11 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - DUTYFREE</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/DUTYFREE.styles.css" asp-append-version="true" />
-</head>
-<body>
+﻿@model UsersViewModel
+@{
+}
+
+    <meta name="viewport" content="width=device-width" />
+    <title>Security Index</title>
+ 
+<div class="boxOverlay">
     <div class="overlay">
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow  bg-black opacity-75" style="border-bottom:3px solid white">
@@ -38,23 +35,35 @@
                 </div>
             </nav>
         </header>
-    </div>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    
-        <div class="container-footer">
-        <footer class="border-top footer text-muted">
-            &copy; 2023 - DUTYFREE - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </footer>
-        </div>
-    
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
+
+    <div class="table-container" style="margin-top:300px">
+        <table>
+            <thead>
+                <tr>
+                    <th>UserId</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <td>@user.UserId</td>
+                        <td>@user.Name</td>
+                        <td>@user.Email</td>
+                        <td>@user.Role</td>
+                        <td>
+                            <form asp-controller="Security" asp-action="Login" method="post">
+                                <input type="hidden" name="username" value="@user.Name" />
+                                <button type="submit" class="login-button">Přihlásit se</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
