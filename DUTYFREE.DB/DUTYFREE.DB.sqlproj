@@ -69,5 +69,6 @@
     <Build Include="dbo\Stored Procedures\ProcProductDelete.sql" />
     <Build Include="dbo\Stored Procedures\ProcProducts.sql" />
     <Build Include="dbo\Stored Procedures\ProcGetProductById.sql" />
+    <Build Include="dbo\Tables\Users.sql" />
   </ItemGroup>
 </Project>
